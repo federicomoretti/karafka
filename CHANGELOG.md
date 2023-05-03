@@ -1,12 +1,19 @@
 # Karafka framework changelog
 
 ## 2.1.0 (Unreleased)
-- **[Feature]** Introduce collective Virtual Partitions offset management
+- **[Feature]** Introduce collective Virtual Partitions offset management.
+- **[Feature]** Use virtual offsets to filter out messages that would be re-processed upon retries.
+- [Improvement] No longer break processing on failing parallel virtual partitions in ActiveJob because it is compensated by virtual marking.
 - [Improvement] Always use Virtual offset management for Pro ActiveJobs.
 - [Improvement] Do not attempt to mark offsets on already revoked partitions.
 - [Improvement] Make sure, that VP components are not injected into non VP strategies.
 - [Improvement] Improve complex strategies inheritance flow.
 - [Improvement] Optimize offset management for DLQ + MoM feature combinations.
+- [Change] Removed `Karafka::Pro::BaseConsumer` in favor of `Karafka::BaseConsumer`. (#1345)
+
+### Upgrade notes
+
+1. Replace `Karafka::Pro::BaseConsumer` references to `Karafka::BaseConsumer`.
 
 ## 2.0.41 (2023-14-19)
 - **[Feature]** Provide `Karafka::Pro::Iterator` for anonymous topic/partitions iterations and messages lookups (#1389 and #1427).
@@ -68,7 +75,7 @@
 
 ## 2.0.35 (2023-03-13)
 - **[Feature]** Allow for defining topics config via the DSL and its automatic creation via CLI command.
-- **[Feature]** Allow for full topics reset and topics repartitioning via the CLI. 
+- **[Feature]** Allow for full topics reset and topics repartitioning via the CLI.
 
 ## 2.0.34 (2023-03-04)
 - [Improvement] Attach an `embedded` tag to Karafka processes started using the embedded API.
